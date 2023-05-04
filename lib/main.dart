@@ -31,15 +31,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  
-
+  final _messangerKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
+    return MaterialApp(
+      scaffoldMessengerKey: _messangerKey,
       home: Scaffold(
         appBar: AppBar(title: const Text("Material Widget")),
+        body: Center(
+          child: Chip(
+            elevation: 7.0,
+            shadowColor: Color.fromARGB(255, 106, 158, 255),
+            avatar: CircleAvatar(
+                backgroundColor: Colors.blueAccent,
+                child: Text(
+                  "SC",
+                )),
+            label: Text("Simone Carta"),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          final snackBar = SnackBar(
+              content: Text("Prova snackbar"),
+              action: SnackBarAction(label: "Undo", onPressed: () {}));
+
+          _messangerKey.currentState?.showSnackBar(snackBar);
+        }),
       ),
     );
   }
